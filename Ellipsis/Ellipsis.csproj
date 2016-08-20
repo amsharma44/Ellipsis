@@ -80,7 +80,7 @@
     </ApplicationDefinition>
     <Compile Include="Services\ConverterService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -135,7 +135,6 @@
     <Folder Include="Data\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Models\" />
-    <Folder Include="MVVM\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
