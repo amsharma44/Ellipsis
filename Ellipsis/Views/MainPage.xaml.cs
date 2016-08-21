@@ -23,5 +23,6 @@ namespace Ellipsis.Views
         {
             InitializeComponent();
         }
+
     }
 }

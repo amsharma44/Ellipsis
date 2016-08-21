@@ -4,10 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ellipsis.Views"
+        xmlns:vm="clr-namespace:Ellipsis.ViewModels"
         mc:Ignorable="d"
         Title="Ellipsis" Height="300" Width="300">
+
+    <Window.DataContext>
+        <vm:MainPageViewModel x:Name="ViewModel" />
+    </Window.DataContext>
+
     <Grid>
-        <!--Main view of the application-->
-        <!--Xaml goes here-->
+
+        <ListView x:Name="VideoConvertListListView"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Margin="16,40,0,0"
+                  ItemsSource="{Binding VideoConvertTaskList}" />
     </Grid>
 </Window>

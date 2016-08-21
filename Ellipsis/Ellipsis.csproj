@@ -78,12 +78,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\VideoConvertTaskControl.xaml.cs">
+      <DependentUpon>VideoConvertTaskControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VideoConvertTaskModel.cs" />
     <Compile Include="Services\ConverterService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\VideoConvertTaskControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,10 +139,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />
-    <Folder Include="Controls\" />
     <Folder Include="Data\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
