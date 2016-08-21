@@ -82,6 +82,7 @@
       <DependentUpon>VideoConvertTaskControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\VideoConvertTaskModel.cs" />
+    <Compile Include="MVVM\DelegateCommand.cs" />
     <Compile Include="Services\ConverterService.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
