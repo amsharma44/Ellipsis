@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ellipsis.Data;
 
 namespace Ellipsis.Interfaces
 {
@@ -10,5 +11,6 @@ namespace Ellipsis.Interfaces
     {
         void Add(T item);
         void Delete(T item);
+        event DataChangedEventHandler<T> DataChanged;
     }
 }
