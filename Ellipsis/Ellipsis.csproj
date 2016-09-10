@@ -81,6 +81,7 @@
     <Compile Include="Controls\VideoConvertTaskControl.xaml.cs">
       <DependentUpon>VideoConvertTaskControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IData.cs" />
     <Compile Include="Models\VideoConvertTaskModel.cs" />
     <Compile Include="MVVM\DelegateCommand.cs" />
     <Compile Include="Services\ConverterService.cs" />
@@ -141,7 +142,6 @@
   <ItemGroup>
     <Folder Include="Assets\" />
     <Folder Include="Data\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">

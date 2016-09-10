@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ellipsis.Models;
+using Ellipsis.Interfaces;
 
 namespace Ellipsis.Controls
 {
@@ -22,15 +23,18 @@ namespace Ellipsis.Controls
     public partial class VideoConvertTaskControl : UserControl
     {
         public VideoConvertTaskModel Model { get; set; }
+        private IData<VideoConvertTaskModel> repo;
 
-        public VideoConvertTaskControl():this(null)
+        public VideoConvertTaskControl():this(null, null)
         {
             InitializeComponent();
         }
 
-        public VideoConvertTaskControl(VideoConvertTaskModel model)
+        public VideoConvertTaskControl(VideoConvertTaskModel model, IData<VideoConvertTaskModel> data)
         {
             InitializeComponent();
+
+            repo = data;
 
             if(model == null)
             {
