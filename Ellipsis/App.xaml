@@ -4,7 +4,5 @@
              xmlns:local="clr-namespace:Ellipsis"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="Views\MainPage.xaml">
-    <Application.Resources>
-        
-    </Application.Resources>
+    <Application.Resources />
 </Application>

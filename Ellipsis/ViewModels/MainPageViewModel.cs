@@ -9,12 +9,16 @@ using System.Collections.ObjectModel;
 using Ellipsis.Interfaces;
 using Ellipsis.Models;
 using Ellipsis.Data;
+using Microsoft.Win32;
+using System.IO;
+using Ellipsis.Services.Helpers;
 
 namespace Ellipsis.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
         private IData<VideoConvertTaskModel> _dataRepository = null;
+        private OpenFileDialog selectVideoFilesDialog = null;
 
         private ObservableCollection<VideoConvertTaskControl> _videoConvertTaskList = null;
 
@@ -36,6 +40,17 @@ namespace Ellipsis.ViewModels
             _videoConvertTaskList = new ObservableCollection<VideoConvertTaskControl>();
             _dataRepository = new DataRepository<VideoConvertTaskModel>();
             _dataRepository.DataChanged += (s) => { load(); };
+            selectVideoFilesDialog = new OpenFileDialog();
+
+            // Customize open file dialog
+            InitializeOpenFileDialog();
+        }
+
+        private void InitializeOpenFileDialog()
+        {
+            this.selectVideoFilesDialog.Multiselect = true;
+            this.selectVideoFilesDialog.Title = "Select Videos";
+            this.selectVideoFilesDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyVideos);
         }
 
         private void load()
@@ -52,12 +67,30 @@ namespace Ellipsis.ViewModels
         //TODO: Replace with command
         public void Add()
         {
-            VideoConvertTaskModel model = new VideoConvertTaskModel()
+            if(this.selectVideoFilesDialog.ShowDialog() == true)
             {
-                Id = 1,
-                Title = "Title"
-            };
-            _dataRepository.Add(model);
+                foreach(string fileName in selectVideoFilesDialog.FileNames)
+                {
+                    try
+                    {
+                        FileInfo file = new FileInfo(fileName);
+                        var details = file.GetDetails();
+                        VideoConvertTaskModel model = new VideoConvertTaskModel()
+                        {
+                            Id = _dataRepository.GetAll().Count + 1,
+                            Title = file.Name,
+                            Path = fileName,
+                            Duration = details["Length"],
+                            Size = details["Size"]
+                        };
+                        _dataRepository.Add(model);
+                    }
+                    catch
+                    {
+                        // TODO : Handle exceptions
+                    }
+                }
+            }
         }
 
         public void Clear()

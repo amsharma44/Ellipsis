@@ -38,7 +38,7 @@
                         Margin="0,8,8,0"
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
-                
+
                 <Button x:Name="AddVideoButton"
                         Margin="4"
                         VerticalAlignment="Top"
