@@ -6,9 +6,12 @@
              xmlns:local="clr-namespace:Ellipsis.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="35" d:DesignWidth="300">
-    
-    <Grid x:Name="RootGrid" Height="Auto">
-        <TextBlock x:Name="VideoNameTextBlcok" Text="{Binding Title}"
-                   Margin="12"/>
+
+    <Grid x:Name="RootGrid" Height="50">
+
+        <Rectangle x:Name="Thumbnail" Fill="Brown" Height="50" Width="50"
+                   HorizontalAlignment="Left"/>
+        <TextBlock x:Name="VideoNameTextBlcok" Text="{Binding Title}" HorizontalAlignment="Left"
+                   Margin="62,12,12,12"/>
     </Grid>
 </UserControl>

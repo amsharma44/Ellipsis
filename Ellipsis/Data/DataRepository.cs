@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ellipsis.Interfaces;
 using Ellipsis.Models;
+using System.Collections.ObjectModel;
 
 namespace Ellipsis.Data
 {
@@ -29,6 +30,11 @@ namespace Ellipsis.Data
                 entityList.Add(item);
                 RaiseDataChanged(item, DataChangedMode.New);
             }
+        }
+
+        public ObservableCollection<T> GetAll()
+        {
+            return new ObservableCollection<T>(entityList);
         }
 
         public void Delete(T item)

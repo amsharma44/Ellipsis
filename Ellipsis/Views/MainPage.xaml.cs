@@ -24,5 +24,9 @@ namespace Ellipsis.Views
             InitializeComponent();
         }
 
+        private void AddVideoButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Add();
+        }
     }
 }

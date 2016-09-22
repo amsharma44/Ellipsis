@@ -19,5 +19,12 @@
                   VerticalAlignment="Top"
                   Margin="16,40,0,0"
                   ItemsSource="{Binding VideoConvertTaskList}" />
+
+        <Button x:Name="AddVideoButton"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Content="Add"
+                Margin="0,50,50,0"
+                Click="AddVideoButton_Click" />
     </Grid>
 </Window>
