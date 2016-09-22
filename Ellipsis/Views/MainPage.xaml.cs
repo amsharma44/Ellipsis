@@ -28,5 +28,10 @@ namespace Ellipsis.Views
         {
             ViewModel.Add();
         }
+
+        private void ClearListButton_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Clear();
+        }
     }
 }

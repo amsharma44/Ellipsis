@@ -59,5 +59,12 @@ namespace Ellipsis.ViewModels
             };
             _dataRepository.Add(model);
         }
+
+        public void Clear()
+        {
+            this.VideoConvertTaskList.Clear();
+            _dataRepository.GetAll().Clear();
+            RaisePropertyChanged(nameof(VideoConvertTaskList));
+        }
     }
 }
