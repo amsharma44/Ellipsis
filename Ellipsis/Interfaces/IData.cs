@@ -10,7 +10,7 @@ namespace Ellipsis.Interfaces
 {
     public interface IData<T>
     {
-        ObservableCollection<T> GetAll();
+        List<T> GetAll();
         void Add(T item);
         void Delete(T item);
         event DataChangedEventHandler<T> DataChanged;

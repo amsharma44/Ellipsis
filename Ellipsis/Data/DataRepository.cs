@@ -32,9 +32,9 @@ namespace Ellipsis.Data
             }
         }
 
-        public ObservableCollection<T> GetAll()
+        public List<T> GetAll()
         {
-            return new ObservableCollection<T>(entityList);
+            return entityList;
         }
 
         public void Delete(T item)
