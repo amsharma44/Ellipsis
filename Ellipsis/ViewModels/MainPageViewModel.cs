@@ -12,6 +12,8 @@ using Ellipsis.Data;
 using Microsoft.Win32;
 using System.IO;
 using Ellipsis.Services.Helpers;
+using NReco.VideoConverter;
+using System.Timers;
 
 namespace Ellipsis.ViewModels
 {
@@ -19,6 +21,11 @@ namespace Ellipsis.ViewModels
     {
         private IData<VideoConvertTaskModel> _dataRepository = null;
         private OpenFileDialog selectVideoFilesDialog = null;
+
+        private ConvertSettings convertSettins;
+        private FFMpegConverter ffmpegConverter;
+
+        private int currentTask;
 
         private ObservableCollection<VideoConvertTaskControl> _videoConvertTaskList = null;
 
@@ -35,15 +42,36 @@ namespace Ellipsis.ViewModels
             }
         }
 
+
         public MainPageViewModel()
         {
             _videoConvertTaskList = new ObservableCollection<VideoConvertTaskControl>();
             _dataRepository = new DataRepository<VideoConvertTaskModel>();
             _dataRepository.DataChanged += (s) => { load(); };
             selectVideoFilesDialog = new OpenFileDialog();
+            convertSettins = new ConvertSettings();
+            ffmpegConverter = new FFMpegConverter();
+            currentTask = -1;
+            ffmpegConverter.ConvertProgress += FfmpegConverter_ConvertProgress;
 
             // Customize open file dialog
             InitializeOpenFileDialog();
+            initializeSettings();
+        }
+
+        private void FfmpegConverter_ConvertProgress(object sender, ConvertProgressEventArgs e)
+        {
+            if(currentTask != -1)
+            {
+                var task = _dataRepository.GetAll().Where(x => x.Id == currentTask).FirstOrDefault();
+                task.Progress = (int)(e.Processed.TotalSeconds * 100 / e.TotalDuration.TotalSeconds);
+            }
+        }
+
+        private void initializeSettings()
+        {
+            this.convertSettins.VideoFrameRate = 15;
+            this.convertSettins.SetVideoFrameSize(640, 480);
         }
 
         private void InitializeOpenFileDialog()
@@ -64,8 +92,35 @@ namespace Ellipsis.ViewModels
             RaisePropertyChanged(nameof(VideoConvertTaskList));
         }
 
-        //TODO: Replace with command
-        public void Add()
+
+        public async Task Convert()
+        {
+            // TODO:Implement convert
+
+            foreach(var task in _dataRepository.GetAll())
+            {
+                try
+                {
+                    currentTask = task.Id;
+                    await Task.Run(async () =>
+                    {
+                        ffmpegConverter.ConvertMedia(task.Path, null, String.Format(task.Path + ".flv"), Format.flv, convertSettins);
+                        await Task.Delay(0);
+                    });
+                }
+                catch(Exception e)
+                {
+                    // TODO: Handle Exception
+                }
+            }
+
+            currentTask = -1;
+
+            await Task.Delay(0);
+        }
+
+        
+        public async Task Add()
         {
             if(this.selectVideoFilesDialog.ShowDialog() == true)
             {
@@ -80,17 +135,23 @@ namespace Ellipsis.ViewModels
                             Id = _dataRepository.GetAll().Count + 1,
                             Title = file.Name,
                             Path = fileName,
-                            Duration = details["Length"],
+                            Duration = details.Keys.Contains("Length") ?details["Length"] : "--:--:--",
                             Size = details["Size"]
                         };
+                        //Get video thumbnail
+                        ffmpegConverter.GetVideoThumbnail(model.Path, String.Format(Path.GetTempPath() + model.Id + ".jpg"));
+                        model.ThumbPath = String.Format(Path.GetTempPath() + model.Id + ".jpg");
+
                         _dataRepository.Add(model);
                     }
-                    catch
+                    catch(Exception e)
                     {
                         // TODO : Handle exceptions
                     }
                 }
             }
+
+            await Task.Delay(0);
         }
 
         public void Clear()

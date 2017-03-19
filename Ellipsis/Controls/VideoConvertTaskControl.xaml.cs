@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Ellipsis.Models;
 using Ellipsis.Interfaces;
+using System.IO;
 
 namespace Ellipsis.Controls
 {
@@ -44,8 +45,18 @@ namespace Ellipsis.Controls
             {
                 Model = model;
             }
-
+            
             this.DataContext = Model;
+        }
+
+        public void SetThumbnail(Stream s)
+        {
+            var imgs = new BitmapImage();
+            imgs.BeginInit();
+            imgs.StreamSource = s;
+            imgs.EndInit();
+
+            this.Thumbnail.Source = imgs;
         }
     }
 }

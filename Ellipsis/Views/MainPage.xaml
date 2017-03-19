@@ -20,6 +20,18 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <Button x:Name="OutputSettingButton"
+                Margin="0,0,8,8"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Content="Setting" />
+
+        <ListView x:Name="TempList"
+                  Width="60"
+                  Height="40"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom" />
+
 
         <Grid Grid.Row="1">
 
@@ -32,7 +44,17 @@
                       Margin="8"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
-                      ItemsSource="{Binding VideoConvertTaskList}" />
+                      ItemsSource="{Binding VideoConvertTaskList}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="Height" Value="64" />
+                        <Setter Property="HorizontalAlignment" Value="Stretch" />
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        <Setter Property="VerticalAlignment" Value="Stretch" />
+                        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
 
             <StackPanel Grid.Row="1"
                         Margin="0,8,8,0"
@@ -54,6 +76,7 @@
                 <Button x:Name="ConvertVideoButton"
                         Margin="4"
                         VerticalAlignment="Top"
+                        Click="ConvertVideoButton_Click"
                         Content="Convert" />
 
 

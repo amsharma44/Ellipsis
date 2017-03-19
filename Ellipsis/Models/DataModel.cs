@@ -10,5 +10,6 @@ namespace Ellipsis.Models
     {
         public int Id { get; set; }
         public string Path { get; set; }
+        public string ThumbPath { get; set; }
     }
 }

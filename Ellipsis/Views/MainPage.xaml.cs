@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ellipsis.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,14 +25,19 @@ namespace Ellipsis.Views
             InitializeComponent();
         }
 
-        private void AddVideoButton_Click(object sender, RoutedEventArgs e)
+        private async void AddVideoButton_Click(object sender, RoutedEventArgs e)
         {
-            ViewModel.Add();
+            await ViewModel.Add();
         }
 
         private void ClearListButton_Click(object sender, RoutedEventArgs e)
         {
             ViewModel.Clear();
+        }
+
+        private async void ConvertVideoButton_Click(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.Convert();
         }
     }
 }

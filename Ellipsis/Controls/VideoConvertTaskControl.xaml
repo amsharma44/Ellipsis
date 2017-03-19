@@ -4,20 +4,61 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Ellipsis.Controls"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             d:DesignHeight="35"
+             d:DesignHeight="64"
              d:DesignWidth="300"
              mc:Ignorable="d">
 
-    <Grid x:Name="RootGrid" Height="50">
+    <Grid x:Name="RootGrid"
+          VerticalAlignment="Stretch"
+          Background="Blue">
+        <Grid Margin="2" Background="White">
 
-        <Rectangle x:Name="Thumbnail"
-                   Width="50"
-                   Height="50"
-                   HorizontalAlignment="Left"
-                   Fill="Brown" />
-        <TextBlock x:Name="VideoNameTextBlcok"
-                   Margin="62,12,12,12"
-                   HorizontalAlignment="Left"
-                   Text="{Binding Title}" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Width="90"
+                  Height="60"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
+                <Image x:Name="Thumbnail"
+                       Width="90"
+                       Height="60"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Source="{Binding ThumbPath}" />
+
+                <TextBlock x:Name="VideoLengthTextBlock"
+                           Height="16"
+                           MinWidth="40"
+                           MaxWidth="60"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Bottom"
+                           Panel.ZIndex="5"
+                           Background="Black"
+                           FontSize="10"
+                           Foreground="White"
+                           Text="{Binding Duration}"
+                           TextAlignment="Center" />
+            </Grid>
+
+            <TextBlock x:Name="VideoNameTextBlcok"
+                       Grid.Column="1"
+                       Margin="8,8,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       Text="{Binding Title}" />
+
+            <ProgressBar x:Name="ConversionProgressBar"
+                         Grid.Column="1"
+                         Width="180"
+                         Height="16"
+                         Margin="8,28,0,0"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Foreground="Green"
+                         Value="{Binding Progress}" />
+        </Grid>
     </Grid>
 </UserControl>
